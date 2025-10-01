@@ -1,9 +1,9 @@
 ﻿using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
-using tech_store_api.Infrastructure.Data;
 
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using API_mktVendas.Infrastructure.Data;
 
 namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 {
@@ -13,7 +13,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 
         public UsuarioRepository(AppDbContext context)
         {
-            _context = context;
+          _context .context = context;
         }
 
         public IEnumerable<Usuario> ListarTodos()
