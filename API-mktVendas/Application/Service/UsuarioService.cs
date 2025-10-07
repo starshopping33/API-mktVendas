@@ -24,8 +24,16 @@ namespace API_mktVendas.Application.Service
 
         public Usuario CriarUsuario(Usuario usuario)
         {
+
             _repo.Add(usuario);
             return usuario;
         }
+
+        public Usuario? ObterPorEmail(string email)
+        {
+            return _repo.ObterPorEmail(email);
+        }
+
+
     }
 }
