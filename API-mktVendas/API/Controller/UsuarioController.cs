@@ -1,6 +1,9 @@
-﻿using API_mktVendas.Application.Service;
+﻿using API_mktVendas.API.Controller;
+using API_mktVendas.Application.Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+using static API_mktVendas.Application.Dto.AuthDto;
 
 namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
 {
@@ -23,17 +26,23 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return Ok(usuario);
         }
 
+
         [HttpPost]
         public IActionResult CreateCadastro([FromBody] Usuario usuario)
         {
-            if (usuario == null)
+            if (usuario == null || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha) || string.IsNullOrEmpty(usuario.Cpf))
                 return BadRequest("Cadastro inválido.");
 
-            var createdCadastro = _service.CriarUsuario(usuario);
+            if (!CpfValidate.Validar(usuario.Cpf))
+                return BadRequest("CPF inválido.");
+
+            
+            usuario.Senha = null;
+
+            var createdCadastro = _service.RegisterAsync(usuario);
 
             return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
         }
 
-       
     }
 }

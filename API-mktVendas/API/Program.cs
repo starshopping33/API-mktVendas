@@ -1,8 +1,14 @@
 ﻿using API_mktVendas.Application.Service;
+using API_mktVendas.Domain.Interfaces;
+using API_mktVendas.Infrastructure.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
+using System.Text;
 using tech_store_api.Infrastructure.Data;
+using static API_mktVendas.Application.Service.UsuarioService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,8 +36,30 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<LoginService>();
+
+//// JWT
+var jwt = builder.Configuration.GetSection("Jwt");
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o =>
+    {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!)),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = jwt["Issuer"],
+            ValidAudience = jwt["Audience"],
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

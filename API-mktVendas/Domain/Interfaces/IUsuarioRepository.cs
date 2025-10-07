@@ -1,4 +1,5 @@
 ﻿using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
 {
@@ -7,6 +8,11 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
         IEnumerable<Usuario> ListarTodos();
         void Add(Usuario usuario);
         Usuario ObterPorId(int id);
+
+        Task AddAsync(Usuario usuario);
+        Usuario? ObterPorEmail(string email);
+        Task<Usuario?> GetByEmailAsync(string email);
+
 
     }
 }
