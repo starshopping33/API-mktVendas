@@ -1,4 +1,6 @@
 ﻿using API_mktVendas.Application.Service;
+using API_mktVendas.Domain.Interfaces;
+using API_mktVendas.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
@@ -30,6 +32,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<LoginService>();
 
 var app = builder.Build();
 

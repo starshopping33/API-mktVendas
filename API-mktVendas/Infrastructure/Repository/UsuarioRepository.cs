@@ -53,5 +53,10 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
             _context.Usuario.Add(usuario);
             _context.SaveChanges();
         }
+
+        public Usuario ObterPorEmail(string email)
+        {
+            return _context.Usuario.FirstOrDefault(u => u.Email == email);
+        }
     }
 }
