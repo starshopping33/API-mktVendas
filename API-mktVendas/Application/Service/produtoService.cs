@@ -1,33 +1,37 @@
-﻿
-using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+﻿using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 
 namespace API_mktVendas.Application.Service
 {
-    public class produtoService
+    public class ProdutoService
   
     {
-        private readonly IprodutoRepository _repo;
+        private readonly IProdutoRepository _repo;
 
-        public produtoService(IprodutoRepository repo)
+        public ProdutoService(IProdutoRepository repo)
         {
             _repo = repo;
         }
 
-        public IEnumerable<produto> Obterproduto()
+        public IEnumerable<Produto> Obterproduto()
         {
             return _repo.ListarTodos();
         }
 
-        public produto? ObterprodutoPorId(int id)
-        {
-            return _repo.ObterPorId(id);
-        }
+        //public Produto? ObterprodutoPorId(int id)
+        //{
+        //    return _repo.ObterPorId(id);
+        //}
 
-        public produto Criarproduto(produto produto)
+        public Produto Criarproduto(Produto produto)
         {
             _repo.Add(produto);
             return produto;
+        }
+
+        internal object Deletarproduto(Produto produto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

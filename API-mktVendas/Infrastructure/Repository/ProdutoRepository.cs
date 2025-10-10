@@ -3,43 +3,44 @@ using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using API_mktVendas.Infrastructure.Data;
 
 namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 {
-    public class produtoRepository : IprodutoRepository
+    public class ProdutoRepository : IProdutoRepository
     {
         private readonly AppDbContext _context;
 
-      public produtoRepository(AppDbContext context)
+      public ProdutoRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<produto> ListarTodos()
+        public IEnumerable<Produto> ListarTodos()
         {
-            return _context.produto.ToList();
+            return _context.Produto.ToList();
         }
 
-        public produto ObterPorId(int id)
+        public Produto ObterPorId(int id)
         {
-            return _context.produto.Find(id);
+            return _context.Produto.Find(id);
         }
 
-        public void Adicionar(produto produto)
+        public void Adicionar(Produto produto)
         {
             _context.Produto.Add(produto);
         }
 
-        public void Atualizar(produto produto)
+        public void Atualizar(Produto produto)
         {
-            _context.produto.Update(produto);
+            _context.Produto.Update(produto);
         }
 
         public void Remover(int id)
         {
-            var produto = _context.produto.Find(id);
+            var produto = _context.Produto.Find(id);
             if (produto != null)
-                _context.produto.Remove(produto);
+                _context.Produto.Remove(produto);
         }
 
         public void Salvar()
@@ -47,9 +48,9 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public void Add(produto produto)
+        public void Add(Produto produto)
         {
-            _context.produto.Add(produto);
+            _context.Produto.Add(produto);
             _context.SaveChanges();
         }
     }

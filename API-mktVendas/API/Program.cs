@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Data;
+using API_mktVendas.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

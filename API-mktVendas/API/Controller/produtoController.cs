@@ -8,10 +8,10 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
     [Route("api/[controller]")]
     public class produto : ControllerBase
     {
-        private readonly produtoService _service;
+        private readonly ProdutoService _service;
 
 
-        public produto(produtoService service)
+        public produto(ProdutoService service)
         {
             _service = service;
         }
@@ -24,7 +24,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
         }
 
         [HttpPost]
-        public IActionResult CreateCadastro([FromBody] produto produto)
+        public IActionResult CreateCadastro([FromBody] Produto produto)
         {
             if (produto == null)
                 return BadRequest("Cadastro inválido.");
@@ -34,6 +34,30 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
         }
 
+
+
+  [HttpPut]
+  public IActionResult AtualizarProduto([FromBody] Produto produto)
+{
+    if (produto == null)
+        return BadRequest("Atualizacaoinvalida.");
+
+    var AtualizarProduto = _service.Criarproduto(produto);
+
+    return CreatedAtAction(nameof(Get), new { id = AtualizarProduto.Id }, AtualizarProduto);
+}
+
+
+        [HttpDelete]
+        public IActionResult DeletarProduto([FromBody] Produto produto)
+        {
+            if (produto == null)
+                return BadRequest("item excluido.");
+
+            var DeletarProduto = _service.Deletarproduto(produto);
+
+            return CreatedAtAction(nameof(Get), new { id = DeletarProduto }, DeletarProduto);
+        }
 
     }
 }

@@ -2,11 +2,9 @@
 
 namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
 {
-    public interface IprodutoRepository
+    public interface IProdutoRepository
     {
-        IEnumerable<produto> ListarTodos();
-        void Add(produto produto);
-      
-
+        IEnumerable<Produto> ListarTodos();
+        void Add(Produto produto);
     }
 }

@@ -13,7 +13,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 
         public UsuarioRepository(AppDbContext context)
         {
-          _context .context = context;
+          _context = context;
         }
 
         public IEnumerable<Usuario> ListarTodos()

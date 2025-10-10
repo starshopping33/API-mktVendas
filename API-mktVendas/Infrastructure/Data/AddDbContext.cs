@@ -8,7 +8,7 @@ namespace API_mktVendas.Infrastructure.Data
     public class AppDbContext : DbContext
     {
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<produto> produto { get; set; }
+        public DbSet<Produto> Produto { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,12 +1,11 @@
 ﻿namespace projeto_vwndas.Projeto_Vendas_API.Domain.Entities
 {
-    public class produto
+    public class Produto
     {
         public int Id { get; set; }
-
-        public string nome { get; set; }
-        public string preço{ get; set; }
-        public string descriçao { get; set; }
-        public string imagem { get; set; }
+        public string Nome { get; set; }
+        public string Preco{ get; set; }
+        public string Descricao { get; set; }
+        public string Imagem { get; set; }
     }
 }
