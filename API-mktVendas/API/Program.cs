@@ -58,6 +58,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<LoginService>();
+
 var app = builder.Build();
 
 

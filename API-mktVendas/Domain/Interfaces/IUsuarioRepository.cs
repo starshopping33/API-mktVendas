@@ -8,6 +8,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
         IEnumerable<Usuario> ListarTodos();
         void Add(Usuario usuario);
         Usuario ObterPorId(int id);
+        Usuario ObterPorEmail(string email);
 
         Task AddAsync(Usuario usuario);
         Usuario? ObterPorEmail(string email);
