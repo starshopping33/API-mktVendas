@@ -3,6 +3,7 @@ using API_mktVendas.Application.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+using static API_mktVendas.Application.Dto.AuthDto;
 
 namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
 {
@@ -25,6 +26,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return Ok(usuario);
         }
 
+
         [HttpPost]
         public IActionResult CreateCadastro([FromBody] Usuario usuario)
         {
@@ -34,13 +36,10 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             if (!CpfValidate.Validar(usuario.Cpf))
                 return BadRequest("CPF inválido.");
 
-            var hasher = new PasswordHasher<Usuario>();
-            usuario.SenhaHash = hasher.HashPassword(usuario, usuario.Senha);
-
             
             usuario.Senha = null;
 
-            var createdCadastro = _service.CriarUsuario(usuario);
+            var createdCadastro = _service.RegisterAsync(usuario);
 
             return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
         }

@@ -1,9 +1,11 @@
-﻿using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
-using tech_store_api.Infrastructure.Data;
 
-using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
-using Microsoft.EntityFrameworkCore;
+using tech_store_api.Infrastructure.Data;
+using XAct.Library.Settings;
+using XAct.Users;
+using Db = Sitecore.FakeDb.Db;
 
 namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 {
@@ -58,5 +60,19 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
         {
             return _context.Usuario.FirstOrDefault(u => u.Email == email);
         }
+
+        public async Task AddAsync(Usuario usuario)
+        {
+            await _context.Usuario.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Usuario?> GetByEmailAsync(string email)
+        {
+            return await _context.Usuario
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
     }
 }
