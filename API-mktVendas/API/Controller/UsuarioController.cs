@@ -44,5 +44,27 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
         }
 
+      
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdateUsuario(int id, [FromBody] Usuario usuario)
+        {
+            if (usuario == null)
+                return BadRequest("Atualização inválida.");
+
+         
+
+           
+
+            usuario.Id = id; 
+
+            var updatedUsuario = _service.UpdateUsuario(usuario);
+
+            if (updatedUsuario == null)
+                return NotFound("Usuário não encontrado.");
+
+            return Ok(updatedUsuario);
+        }
+
     }
 }
