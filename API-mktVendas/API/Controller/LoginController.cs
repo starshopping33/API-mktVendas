@@ -24,7 +24,7 @@ namespace API_mktVendas.API.Controller
                 return BadRequest("Login inválido.");
 
             
-            var usuario = _usuarioService.ObterPorEmail(login.Email);
+            var usuario = _usuarioService.ObterUsuarioPorEmail(login.Email);
             if (usuario == null)
                 return Unauthorized("Usuário não encontrado.");
 

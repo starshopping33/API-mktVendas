@@ -11,9 +11,11 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
         Usuario ObterPorEmail(string email);
 
         Task AddAsync(Usuario usuario);
-        Usuario? ObterPorEmail(string email);
+        
         Task<Usuario?> GetByEmailAsync(string email);
 
+        void Update(Usuario usuario);
+        void SaveChanges();
 
     }
 }

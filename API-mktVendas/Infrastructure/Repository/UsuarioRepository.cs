@@ -74,5 +74,15 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        public void Update(Usuario usuario)
+        {
+            _context.Usuario.Update(usuario);
+            _context.SaveChanges(); 
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }
