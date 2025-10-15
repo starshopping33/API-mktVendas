@@ -53,5 +53,10 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
             _context.Produto.Add(produto);
             _context.SaveChanges();
         }
+
+        public void atualizar(Produto produto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

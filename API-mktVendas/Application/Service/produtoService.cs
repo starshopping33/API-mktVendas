@@ -23,9 +23,9 @@ namespace API_mktVendas.Application.Service
         //    return _repo.ObterPorId(id);
         //}
 
-        public Produto Criarproduto(Produto produto)
+        public Produto Atualizarproduto(Produto produto)
         {
-            _repo.Add(produto);
+            _repo.Atualizar(produto);
             return produto;
         }
 
