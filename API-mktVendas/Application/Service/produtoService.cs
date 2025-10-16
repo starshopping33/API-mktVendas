@@ -23,15 +23,22 @@ namespace API_mktVendas.Application.Service
         //    return _repo.ObterPorId(id);
         //}
 
-        public Produto Atualizarproduto(Produto produto)
+        public Produto criarproduto(Produto produto)
         {
-            _repo.Atualizar(produto);
+            _repo.Add(produto);
             return produto;
         }
 
         internal object Deletarproduto(Produto produto)
         {
-            throw new NotImplementedException();
+            _repo.Deletar(produto);
+            return produto;
+        }
+
+        public Produto CriarProduto(Produto Produto)
+        {
+            _repo.Add(Produto);
+            return Produto;
         }
     }
 }

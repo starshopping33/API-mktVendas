@@ -6,6 +6,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
     {
         IEnumerable<Produto> ListarTodos();
         void atualizar(Produto produto);
-        void Atualizar(Produto produto);
+        void Deletar(Produto produto);
+        void Add(Produto Produto);
     }
 }

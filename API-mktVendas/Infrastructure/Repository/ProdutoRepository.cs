@@ -56,6 +56,11 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
 
         public void atualizar(Produto produto)
         {
+            _context.SaveChanges(); 
+        }
+
+        public void Deletar(Produto produto)
+        {
             throw new NotImplementedException();
         }
     }

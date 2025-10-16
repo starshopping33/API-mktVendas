@@ -9,7 +9,8 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
     public class produto : ControllerBase
     {
         private readonly ProdutoService _service;
-
+        private readonly object criarprodutoId;
+        private object criarproduto;
 
         public produto(ProdutoService service)
         {
@@ -29,9 +30,9 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             if (produto == null)
                 return BadRequest("Cadastro inválido.");
 
-            var createdCadastro = _service.Atualizarproduto(produto);
+            var createdCadastro = _service.criarproduto(produto);
 
-            return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
+            return CreatedAtAction(nameof(Get), new { id = criarproduto },criarproduto);
         }
 
 
@@ -42,7 +43,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
     if (produto == null)
         return BadRequest("Atualizacaoinvalida.");
 
-    var AtualizarProduto = _service.Atualizarproduto(produto);
+    var AtualizarProduto = _service.criarproduto(produto);
 
     return CreatedAtAction(nameof(Get), new { id = AtualizarProduto.Id }, AtualizarProduto);
 }
