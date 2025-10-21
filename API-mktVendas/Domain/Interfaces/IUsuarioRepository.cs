@@ -1,7 +1,9 @@
 ﻿using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces
+using XAct.Users;
+
+namespace tech_store_api.Domain.Interfaces
 {
     public interface IUsuarioRepository
     {
