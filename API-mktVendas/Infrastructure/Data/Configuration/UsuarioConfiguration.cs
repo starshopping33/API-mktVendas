@@ -13,7 +13,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Data.Configuration
         {
             builder.ToTable("Usuario");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.Nome).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Email).IsRequired().HasMaxLength(100);
         }
     }
     }

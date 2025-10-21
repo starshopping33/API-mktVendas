@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>API_mktVendas</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="API\Controller\UsuarioController.cs" />
+    <Compile Remove="Domain\Interfaces\ILoginRepository.cs" />
+    <Compile Remove="Infrastructure\Data\Configuration\LoginConfiguration.cs" />
+    <Compile Remove="Infrastructure\Repository\LoginRepository.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />

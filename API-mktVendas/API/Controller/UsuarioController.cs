@@ -1,6 +1,5 @@
 ﻿using API_mktVendas.API.Controller;
-using API_mktVendas.Application.Service;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using static API_mktVendas.Application.Dto.AuthDto;
@@ -11,7 +10,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
-        private readonly UsuarioService _service;
+        private readonly _service;
 
         
         public UsuarioController(UsuarioService service)
@@ -28,7 +27,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
 
 
         [HttpPost]
-        public IActionResult CreateCadastro([FromBody] Usuario usuario)
+        public IActionResult RegisterAsync([FromBody] Usuario usuario)
         {
             if (usuario == null || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Senha) || string.IsNullOrEmpty(usuario.Cpf))
                 return BadRequest("Cadastro inválido.");
@@ -39,7 +38,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             
             usuario.Senha = null;
 
-            var createdCadastro = _service.RegisterAsync(usuario);
+            var createdCadastro = _service.RegisterAsync(usuario.Email, usuario.SenhaHash);
 
             return CreatedAtAction(nameof(Get), new { id = createdCadastro.Id }, createdCadastro);
         }
@@ -64,6 +63,16 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
                 return NotFound("Usuário não encontrado.");
 
             return Ok(updatedUsuario);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUsuario(int id)
+        {
+            var existingUsuario = _service.ObterUsuarioPorId(id);
+            if (existingUsuario == null)
+                return NotFound("Usuário não encontrado.");
+            _service.DeleteUsuario(id);
+            return NoContent();
         }
 
     }
