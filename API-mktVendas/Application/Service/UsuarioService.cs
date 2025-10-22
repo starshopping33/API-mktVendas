@@ -7,6 +7,7 @@ using System.Text;
 
 
 using XAct.Users;
+using static API_mktVendas.Application.Dto.AuthDto;
 
 namespace API_mktVendas.Application.Service
 {
@@ -51,6 +52,30 @@ namespace API_mktVendas.Application.Service
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<Usuario?> UpdateUsuarioAsync(int id, UpdateDto dto)
+        {
+            var usuario = await repo.GetByIdAsync(id);
+            if (usuario == null)
+                return null;
+
+            if (!string.IsNullOrWhiteSpace(dto.Nome))
+                usuario.Nome = dto.Nome;
+
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+                usuario.Email = dto.Email;
+
+            if (!string.IsNullOrWhiteSpace(dto.Cpf))
+                usuario.Cpf = dto.Cpf;
+
+            if (!string.IsNullOrWhiteSpace(dto.Password))
+                usuario.SenhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+
+            await repo.UpdateAsync(usuario);
+            await repo.SaveChangesAsync();
+
+            return usuario;
         }
     }
 }

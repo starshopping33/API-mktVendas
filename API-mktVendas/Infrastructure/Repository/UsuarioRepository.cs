@@ -18,5 +18,20 @@ namespace tech_store_api.Infrastructure.Repositories
             db.Usuario.Add(usuario);
             await db.SaveChangesAsync();
         }
+
+        public async Task<Usuario?> GetByIdAsync(int id) =>
+          await db.Usuario.FirstOrDefaultAsync(u => u.Id == id);
+
+        public async Task UpdateAsync(Usuario usuario)
+        {
+            db.Usuario.Update(usuario); 
+            await db.SaveChangesAsync();
+     
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await db.SaveChangesAsync();
+        }
     }
 }

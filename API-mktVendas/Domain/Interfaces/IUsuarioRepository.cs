@@ -5,6 +5,11 @@
 namespace API_mktVendas.Domain.Interfaces;
     public interface IUsusarioRepository { 
 
-        Task<Usuario?> GetByEmailAsync(string email);
-        Task AddAsync(Usuario usuario);
-    }
+    Task<Usuario?> GetByEmailAsync(string email);
+    Task<Usuario?> GetByIdAsync(int id);
+    Task AddAsync(Usuario usuario);
+    Task UpdateAsync(Usuario usuario);
+
+    Task SaveChangesAsync();
+
+}
