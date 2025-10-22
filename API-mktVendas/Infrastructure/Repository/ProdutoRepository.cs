@@ -54,14 +54,16 @@ namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public void atualizar(Produto produto)
-        {
-            _context.SaveChanges(); 
-        }
-
         public void Deletar(Produto produto)
         {
-            throw new NotImplementedException();
+            object value = _context.Produto.Remove(produto);
+            _context.SaveChanges();
+        }
+
+        public void atualizar(Produto produto)
+        {
+            object value = _context.Produto.Update(produto);
+            _context.SaveChanges();
         }
     }
 }

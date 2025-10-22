@@ -30,7 +30,7 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             if (produto == null)
                 return BadRequest("Cadastro inválido.");
 
-            var createdCadastro = _service.criarproduto(produto);
+            var createdCadastro = _service.Criarproduto(produto);
 
             return CreatedAtAction(nameof(Get), new { id = criarproduto },criarproduto);
         }
@@ -41,11 +41,11 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
   public IActionResult AtualizarProduto([FromBody] Produto produto)
 {
     if (produto == null)
-        return BadRequest("Atualizacaoinvalida.");
+        return BadRequest();
 
-    var AtualizarProduto = _service.criarproduto(produto);
+    var AtualizarProduto = _service.Atualizarproduto(produto);
 
-    return CreatedAtAction(nameof(Get), new { id = AtualizarProduto.Id }, AtualizarProduto);
+    return CreatedAtAction(nameof(Get), new {  AtualizarProduto }, AtualizarProduto);
 }
 
 

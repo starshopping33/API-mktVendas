@@ -7,6 +7,7 @@ namespace API_mktVendas.Application.Service
   
     {
         private readonly IProdutoRepository _repo;
+        private readonly object _context;
 
         public ProdutoService(IProdutoRepository repo)
         {
@@ -23,7 +24,7 @@ namespace API_mktVendas.Application.Service
         //    return _repo.ObterPorId(id);
         //}
 
-        public Produto criarproduto(Produto produto)
+        public Produto Criarproduto(Produto produto)
         {
             _repo.Add(produto);
             return produto;
@@ -35,10 +36,12 @@ namespace API_mktVendas.Application.Service
             return produto;
         }
 
-        public Produto CriarProduto(Produto Produto)
+        internal object Atualizarproduto(Produto produto)
         {
-            _repo.Add(Produto);
-            return Produto;
+            _repo.atualizar(produto);
+            return produto;
+            ;
+           
         }
     }
 }
