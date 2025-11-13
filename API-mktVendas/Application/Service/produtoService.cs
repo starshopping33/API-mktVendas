@@ -43,5 +43,13 @@ namespace API_mktVendas.Application.Service
             ;
            
         }
+       
+
+        internal void Atualizarproduto(object produto)
+        {
+            return;
+        }
+
+       
     }
 }

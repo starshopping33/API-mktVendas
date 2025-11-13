@@ -51,10 +51,6 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             if (usuario == null)
                 return BadRequest("Atualização inválida.");
 
-         
-
-           
-
             usuario.Id = id; 
 
             var updatedUsuario = _service.UpdateUsuario(usuario);

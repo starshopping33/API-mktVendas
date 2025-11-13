@@ -1,12 +1,12 @@
 ﻿using API_mktVendas.Application.Service;
 using API_mktVendas.Domain.Interfaces;
-
+using API_mktVendas.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
+using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
+using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
 using System.Text;
-using tech_store_api.Infrastructure.Data;
 using tech_store_api.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

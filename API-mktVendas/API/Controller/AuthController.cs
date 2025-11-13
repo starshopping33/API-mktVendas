@@ -49,9 +49,11 @@ namespace tech_store_api.API.Controllers
                     usuario.Id,
                     usuario.Nome,
                     usuario.Email,
-                    usuario.Cpf
+                    usuario.Cpf,
                 }
                 });
+
+
 
         }
     }

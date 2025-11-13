@@ -35,18 +35,16 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return CreatedAtAction(nameof(Get), new { id = criarproduto },criarproduto);
         }
 
+        [HttpPut]
+          public IActionResult AtualizarProduto([FromBody] Produto produto)
+         {
+            if (produto == null)
+             return BadRequest();
 
+         var AtualizarProduto = _service.Atualizarproduto(produto);
 
-  [HttpPut]
-  public IActionResult AtualizarProduto([FromBody] Produto produto)
-{
-    if (produto == null)
-        return BadRequest();
-
-    var AtualizarProduto = _service.Atualizarproduto(produto);
-
-    return CreatedAtAction(nameof(Get), new {  AtualizarProduto }, AtualizarProduto);
-}
+         return CreatedAtAction(nameof(Get), new {  AtualizarProduto }, AtualizarProduto);
+         }
 
 
         [HttpDelete]
@@ -60,5 +58,40 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
             return CreatedAtAction(nameof(Get), new { id = DeletarProduto }, DeletarProduto);
         }
 
+
+
+
+
+         
+        [HttpPut("atualizar-estoque/{id}")]
+        public async Task<IActionResult> AtualizarEstoque(int id, [FromBody] int novaQuantidade)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+
+            if (produto == null)
+                return NotFound("Produto não encontrado.");
+
+            produto.Quantidade = novaQuantidade;
+            await _context.SaveChangesAsync();
+
+            return Ok(produto);
+        }
+
+        [HttpPut("diminuir-estoque/{id}")]
+        public async Task<IActionResult> DiminuirEstoque(int id, [FromBody] int quantidadeVendida)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+
+            if (produto == null)
+                return NotFound("Produto não encontrado.");
+
+            if (produto.Quantidade < quantidadeVendida)
+                return BadRequest("Estoque insuficiente.");
+
+            produto.Quantidade -= quantidadeVendida;
+            await _context.SaveChangesAsync();
+
+            return Ok(produto);
+        }
     }
 }
