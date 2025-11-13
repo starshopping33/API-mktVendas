@@ -1,4 +1,5 @@
 ﻿using API_mktVendas.API.Controller;
+using API_mktVendas.Application.Dto;
 using API_mktVendas.Application.Service;
 using Microsoft.AspNetCore.Mvc;
 using Paket;
@@ -21,8 +22,8 @@ namespace tech_store_api.API.Controllers
             if (!CpfValidate.Validar(dto.Cpf))
                 return BadRequest("CPF inválido.");
 
-            await auth.RegisterAsync(dto.Nome, dto.Cpf, dto.Email, dto.Password);
-            return Created("", new { dto.Email });
+            await auth.RegisterAsync(dto.Nome, dto.Cpf, dto.Email, dto.Telefone , dto.Password);
+            return Created("", new { dto.Email, dto.Nome});
         }
 
 
@@ -34,25 +35,48 @@ namespace tech_store_api.API.Controllers
             return Ok(new AuthResponse(token));
         }
 
-        [HttpPatch("update/{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateDto dto)
+
+
+        [HttpPatch("Update/{id:int}")]
+        public async Task<IActionResult> UpdateUsuario(int id, [FromBody] AuthDto.UpdateDto dto)
         {
-            var usuario = await auth.UpdateUsuarioAsync(id, dto);
-            if (usuario == null)
-                return NotFound("Usuário não encontrado.");
-
-            return Ok(new
+            try
             {
-                message = "Usuário atualizado com sucesso!",
-                usuario = new
-                {
-                    usuario.Id,
-                    usuario.Nome,
-                    usuario.Email,
-                    usuario.Cpf
-                }
-                });
+                if (dto == null)
+                    return BadRequest("Dados inválidos.");
 
+                var usuario = await auth.UpdateUsuarioAsync(id, dto);
+
+                if (usuario == null)
+                    return NotFound("Usuário não encontrado.");
+
+                return Ok(new
+                {
+                    message = "Usuário atualizado com sucesso!",
+                    usuario
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Erro interno no servidor", detail = ex.Message });
+            }
         }
+        
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteUsuario(int id)
+        {
+            var deleted = await auth.DeleteUsuarioAsync(id);
+
+            if (!deleted)
+                return NotFound(new { message = $"Usuário com ID {id} não encontrado." });
+
+            return Ok(new { message = $"Usuário {id} deletado com sucesso!" });
+        }
+
+
     }
 }
