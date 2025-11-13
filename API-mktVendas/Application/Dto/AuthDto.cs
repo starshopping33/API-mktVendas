@@ -4,14 +4,22 @@
     {
         public class RegisterDto
         {
-            public string Nome { get; set; } = string.Empty;
-            public string Email { get; set; } = string.Empty;
+
+            public bool IsAdmin { get; set; } = false;
+            public string? Nome { get; set; } = string.Empty;
+            public string? Email { get; set; } = string.Empty;
             public string Cpf { get; set; } = string.Empty;
+            public string Telefone { get; set; } = string.Empty;
             public string Password { get; set; } = string.Empty;
+
+            public string? ImagemBase64 { get; set; } = string.Empty;
+
+
         }
 
         public class LoginDto
         {
+            public bool IsAdmin { get; set; } = false;
             public string Email { get; set; } = string.Empty;
             public string Password { get; set; } = string.Empty;
         }
@@ -20,9 +28,11 @@
 
         public class UpdateDto
         {
+            public bool IsAdmin { get; set; } = false;
             public string? Nome { get; set; }
             public string? Email { get; set; }
             public string? Cpf { get; set; }
+            public string? ImagemBase64 { get; set; } = null;
             public string? Password { get; set; }
         }
     }
