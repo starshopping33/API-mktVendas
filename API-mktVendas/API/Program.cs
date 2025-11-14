@@ -38,6 +38,7 @@ builder.Services.AddScoped<IUsusarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
 
 
+
 // JWT
 var jwt = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

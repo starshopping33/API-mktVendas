@@ -35,6 +35,7 @@ namespace tech_store_api.API.Controllers
             return Ok(new AuthResponse(token));
         }
 
+        
 
 
         [HttpPatch("Update/{id:int}")]
