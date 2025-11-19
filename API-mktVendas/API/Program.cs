@@ -36,7 +36,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsusarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
-
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<ProdutoService>();
 
 
 // JWT

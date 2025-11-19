@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 
 
-namespace tech_store_api.Infrastructure.Data
+namespace API_mktVendas.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
