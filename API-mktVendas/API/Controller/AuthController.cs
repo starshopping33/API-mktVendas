@@ -27,6 +27,13 @@ namespace tech_store_api.API.Controllers
         }
 
 
+        [HttpGet("GET")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await auth.GetAllUsersAsync();
+            return Ok(users);
+        }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
@@ -35,6 +42,7 @@ namespace tech_store_api.API.Controllers
             return Ok(new AuthResponse(token));
         }
 
+        
 
 
         [HttpPatch("Update/{id:int}")]

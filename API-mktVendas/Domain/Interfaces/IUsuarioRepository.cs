@@ -10,6 +10,7 @@ namespace API_mktVendas.Domain.Interfaces;
     Task AddAsync(Usuario usuario);
     Task UpdateAsync(Usuario usuario);
 
+    Task<List<Usuario>> GetAllUser();
     Task DeleteAsync(Usuario usuario);
     Task SaveChangesAsync();
 

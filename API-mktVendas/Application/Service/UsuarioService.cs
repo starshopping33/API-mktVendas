@@ -1,4 +1,5 @@
-﻿using API_mktVendas.Domain.Interfaces;
+﻿using API_mktVendas.Application.Dto;
+using API_mktVendas.Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
@@ -31,20 +32,26 @@ namespace API_mktVendas.Application.Service
             if (user is null || !BCrypt.Net.BCrypt.Verify(password, user.SenhaHash))
                 throw new UnauthorizedAccessException("Credenciais inválidas.");
 
-            return GenerateToken(user.Email, user.IsAdmin);
+            return GenerateToken(
+      
+                  user.Id,user.Email,user.Cpf, user.Telefone,user.Nome, user.IsAdmin);
         }
 
-        private string GenerateToken(string email, bool isAdmin)
+        private string GenerateToken(int id ,string email, string cpf,string telefone,string nome, bool isAdmin)
         {
             var jwt = cfg.GetSection("Jwt");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!));
 
             var claims = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, email),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("isAdmin", isAdmin.ToString().ToLower()) 
-    };
+                new Claim("Id", id.ToString()),
+                new Claim("email", email),
+                new Claim("cpf", cpf),
+                new Claim("telefone", telefone),
+                new Claim("nome", nome),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("isAdmin", isAdmin.ToString().ToLower()) 
+            };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -59,6 +66,19 @@ namespace API_mktVendas.Application.Service
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public Task<List<Usuario>> GetAllUsersAsync()
+        {
+            return repo.GetAllUser();
+        }
+
+        public Task<Usuario?> GetByIdAsync(int id)
+        {
+            return repo.GetByIdAsync(id);
+        }
+
+
+       
+       
         public async Task<Usuario?> UpdateUsuarioAsync(int id, UpdateDto dto)
         {
 
