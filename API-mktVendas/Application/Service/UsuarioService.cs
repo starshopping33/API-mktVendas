@@ -32,16 +32,19 @@ namespace API_mktVendas.Application.Service
             if (user is null || !BCrypt.Net.BCrypt.Verify(password, user.SenhaHash))
                 throw new UnauthorizedAccessException("Credenciais inválidas.");
 
-            return GenerateToken(user.Email,user.Cpf, user.Telefone,user.Nome, user.IsAdmin);
+            return GenerateToken(
+      
+                  user.Id,user.Email,user.Cpf, user.Telefone,user.Nome, user.IsAdmin);
         }
 
-        private string GenerateToken(string email, string cpf,string telefone,string nome, bool isAdmin)
+        private string GenerateToken(int id ,string email, string cpf,string telefone,string nome, bool isAdmin)
         {
             var jwt = cfg.GetSection("Jwt");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!));
 
             var claims = new[]
             {
+                new Claim("Id", id.ToString()),
                 new Claim("email", email),
                 new Claim("cpf", cpf),
                 new Claim("telefone", telefone),
@@ -63,6 +66,10 @@ namespace API_mktVendas.Application.Service
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public Task<List<Usuario>> GetAllUsersAsync()
+        {
+            return repo.GetAllUser();
+        }
 
         public Task<Usuario?> GetByIdAsync(int id)
         {
