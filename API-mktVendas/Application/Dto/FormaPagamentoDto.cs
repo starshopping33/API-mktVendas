@@ -5,7 +5,7 @@
 
         public class CriarPagamentoDto
         {
-            public string Tipo { get; set; } = "";
+            public string Tipo { get; set; } = string.Empty;
             public decimal Valor { get; set; }
         }
     }
