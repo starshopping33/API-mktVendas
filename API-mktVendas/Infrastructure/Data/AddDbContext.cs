@@ -12,6 +12,7 @@ namespace API_mktVendas.Infrastructure.Data
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Login> Login { get; set; }
 
+        
         public DbSet<FormaPagamento> FormaPagamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

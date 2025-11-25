@@ -50,7 +50,7 @@ namespace tech_store_api.API.Controllers
         {
             try
             {
-                if (dto == null)
+                if (dto == null)        
                     return BadRequest("Dados inválidos.");
 
                 var usuario = await auth.UpdateUsuarioAsync(id, dto);

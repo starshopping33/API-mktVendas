@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="API\Controller\PedidoController.cs" />
     <Compile Remove="API\Controller\UsuarioController.cs" />
+    <Compile Remove="Application\Service\PedidoService.cs" />
+    <Compile Remove="Domain\Entities\Pedido.cs" />
     <Compile Remove="Domain\Interfaces\ILoginRepository.cs" />
     <Compile Remove="Infrastructure\Data\Configuration\LoginConfiguration.cs" />
     <Compile Remove="Infrastructure\Repository\LoginRepository.cs" />

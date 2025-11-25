@@ -1,4 +1,5 @@
 ﻿using API_mktVendas.Application.Service;
+using API_mktVendas.Domain.Entities;
 using API_mktVendas.Domain.Interfaces;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsusarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<FormaPagamentoService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ProdutoService>();
 
