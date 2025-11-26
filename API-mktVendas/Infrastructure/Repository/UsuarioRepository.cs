@@ -1,7 +1,8 @@
 ﻿using API_mktVendas.Domain.Interfaces;
+using API_mktVendas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
-using tech_store_api.Infrastructure.Data;
+
 using XAct.Users;
 
 namespace tech_store_api.Infrastructure.Repositories

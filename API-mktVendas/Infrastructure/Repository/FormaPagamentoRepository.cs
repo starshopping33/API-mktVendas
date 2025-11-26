@@ -1,6 +1,7 @@
 ﻿using API_mktVendas.Domain.Entities;
+using API_mktVendas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using tech_store_api.Infrastructure.Data;
+
 
 namespace API_mktVendas.Infrastructure.Repository
 {
