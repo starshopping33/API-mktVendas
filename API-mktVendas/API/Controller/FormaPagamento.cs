@@ -32,5 +32,19 @@ namespace API_mktVendas.API.Controller
                 pagamento
             });
         }
+
+        [HttpPatch("Pagar/{id:int}")]
+        public async Task<IActionResult> MarcarComoPago(int id)
+        {
+            try
+            {
+                await _service.MarcarComoPagoAsync(id);
+                return Ok(new { message = "Pagamento pago com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = "falha ao realizar o pagamento" });
+            }
+        }
     }
 }
