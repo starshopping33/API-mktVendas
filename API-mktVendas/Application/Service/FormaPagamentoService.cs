@@ -12,12 +12,14 @@ public class FormaPagamentoService
         _db = db;
     }
 
-    public async Task<FormaPagamento> CriarPagamentoAsync(string tipo, decimal valor)
+    public async Task<FormaPagamento> CriarPagamentoAsync(string tipo, decimal valor, int UserId, int Produtoid)
     {
         var pagamento = new FormaPagamento
         {
             Tipo = tipo,
             Valor = valor,
+            ProdutoId = Produtoid,
+            UsuarioId = UserId,
             Status = "Pendente"
         };
 
