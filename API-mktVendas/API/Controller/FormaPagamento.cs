@@ -24,7 +24,7 @@ namespace API_mktVendas.API.Controller
             if (string.IsNullOrWhiteSpace(dto.Tipo))
                 return BadRequest("O tipo de pagamento é obrigatório.");
 
-            var pagamento = await _service.CriarPagamentoAsync(dto.Tipo, dto.Valor);
+            var pagamento = await _service.CriarPagamentoAsync(dto.Tipo, dto.Valor,dto.UsuarioId, dto.ProdutoId);
 
             return Ok(new
             {

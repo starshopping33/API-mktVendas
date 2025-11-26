@@ -6,5 +6,8 @@
         public string Tipo { get; set; } = string.Empty;
         public decimal Valor { get; set; }
         public string Status { get; set; } = "Pendente";
+        public int UsuarioId { get; set; }
+
+        public int ProdutoId { get; set; }  
     }
 }

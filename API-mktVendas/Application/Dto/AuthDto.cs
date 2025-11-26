@@ -1,4 +1,4 @@
-﻿namespace API_mktVendas.Application.Dto
+﻿    namespace API_mktVendas.Application.Dto
 {
     public class AuthDto
     {
