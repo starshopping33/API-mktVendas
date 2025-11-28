@@ -12,6 +12,8 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Entities
 
         public string Telefone { get; set; } = string.Empty;
 
+        public DateTime DataNascimento { get; set; }
+
         public bool IsAdmin { get; set; } = false;
 
         [NotMapped]
@@ -19,6 +21,6 @@ namespace projeto_vwndas.Projeto_Vendas_API.Domain.Entities
 
        
         public string SenhaHash { get; set; } = string.Empty;
-        public string ImagemBase64 { get; internal set; }
+        public string? ImagemBase64 { get; internal set; }
     }
 }
