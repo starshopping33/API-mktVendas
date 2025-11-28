@@ -14,15 +14,21 @@ namespace tech_store_api.API.Controllers
     public class AuthController(UsuarioService auth) : ControllerBase
     {
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto dto)
+        public async Task<IActionResult> Register([FromBody]RegisterDto dto)
         {
+
+            var maior = auth.IsMaiorIdade(dto.DataNascimento);
+
+            if (!maior)
+                return BadRequest(new { message = "O usuário deve ter pelo menos 18 anos." });
+
             if (string.IsNullOrWhiteSpace(dto.Cpf))
                 throw new Exception("O CPF é obrigatório.");
 
             if (!CpfValidate.Validar(dto.Cpf))
                 return BadRequest("CPF inválido.");
 
-            await auth.RegisterAsync(dto.Nome, dto.Cpf, dto.Email, dto.Telefone , dto.Password);
+            await auth.RegisterAsync(dto.Nome, dto.Cpf, dto.Email, dto.Telefone, dto.DataNascimento , dto.Password);
             return Created("", new { dto.Email, dto.Nome});
         }
 
@@ -85,6 +91,23 @@ namespace tech_store_api.API.Controllers
             return Ok(new { message = $"Usuário {id} deletado com sucesso!" });
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var usuario = await auth.GetByIdAsync(id);
 
+                if (usuario == null)
+                    return NotFound(new { message = "Usuário não encontrado." });
+
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, new { error = "Erro interno no servidor.", details = ex.Message });
+            }
+        }
     }
 }

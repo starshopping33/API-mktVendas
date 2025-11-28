@@ -10,9 +10,12 @@
             public string? Email { get; set; } = string.Empty;
             public string Cpf { get; set; } = string.Empty;
             public string Telefone { get; set; } = string.Empty;
+            public DateTime DataNascimento { get; set; } 
             public string Password { get; set; } = string.Empty;
 
             public string? ImagemBase64 { get; set; } = string.Empty;
+
+
 
 
         }
@@ -32,16 +35,13 @@
             public string? Nome { get; set; }
             public string? Email { get; set; }
             public string? Cpf { get; set; }
-            public string? Telefone { get; set; } 
+            public string? Telefone { get; set; }
+            public DateTime? DataNascimento { get; set; }
             public string? ImagemBase64 { get; set; } = null;
             public string? Password { get; set; }
             
         }
 
-        public class PaymentDto
-        {
-            public decimal Amount { get; set; }
-            public string ProductName { get; set; } = string.Empty;
-        }
+    
     }
 }

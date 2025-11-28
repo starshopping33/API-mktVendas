@@ -19,6 +19,7 @@ namespace tech_store_api.Infrastructure.Repositories
             await db.SaveChangesAsync();
         }
 
+
         public async Task<List<Usuario>> GetAllUser()
         {
             return await db.Usuario.AsNoTracking().ToListAsync();
