@@ -1,13 +1,19 @@
 ﻿using API_mktVendas.Application.Service;
+using API_mktVendas.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
+using XAct;
 
-namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
+namespace projeto_vwndas.Projeto_Vendas_API.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
     public class produto : ControllerBase
+
+
     {
+        private readonly AppDbContext _context;
+
         private readonly ProdutoService _service;
         private readonly object criarprodutoId;
         private object criarproduto;
@@ -59,39 +65,6 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
         }
 
 
-
-
-
          
-        [HttpPut("atualizar-estoque/{id}")]
-        public async Task<IActionResult> AtualizarEstoque(int id, [FromBody] int novaQuantidade)
-        {
-            var produto = await _context.Produtos.FindAsync(id);
-
-            if (produto == null)
-                return NotFound("Produto não encontrado.");
-
-            produto.Quantidade = novaQuantidade;
-            await _context.SaveChangesAsync();
-
-            return Ok(produto);
-        }
-
-        [HttpPut("diminuir-estoque/{id}")]
-        public async Task<IActionResult> DiminuirEstoque(int id, [FromBody] int quantidadeVendida)
-        {
-            var produto = await _context.Produtos.FindAsync(id);
-
-            if (produto == null)
-                return NotFound("Produto não encontrado.");
-
-            if (produto.Quantidade < quantidadeVendida)
-                return BadRequest("Estoque insuficiente.");
-
-            produto.Quantidade -= quantidadeVendida;
-            await _context.SaveChangesAsync();
-
-            return Ok(produto);
-        }
     }
 }
