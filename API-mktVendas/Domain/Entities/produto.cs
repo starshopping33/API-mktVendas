@@ -7,6 +7,9 @@
         public decimal Preco{ get; set; }
         public string Descricao { get; set; }
         public string Imagem { get; set; }
-        public int Quantidade { get; set; }
+        public string CategoriaId{ get; set; } 
+
+        public Categoria categoria { get; set; }
+ 
     }
 }
