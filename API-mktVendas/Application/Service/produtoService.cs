@@ -50,6 +50,24 @@ namespace API_mktVendas.Application.Service
             return;
         }
 
-       
+        internal object ObterPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Deletarproduto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object Obterproduto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Deletarproduto()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
