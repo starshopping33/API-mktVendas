@@ -1,4 +1,5 @@
 ﻿using API_mktVendas.Application.Service;
+using API_mktVendas.Domain.Entities;
 using API_mktVendas.Domain.Interfaces;
 using API_mktVendas.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Interfaces;
 using projeto_vwndas.Projeto_Vendas_API.Infrastructure.Repository;
 using System.Text;
+
 using tech_store_api.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,8 +38,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsusarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<FormaPagamentoService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ProdutoService>();
+
 
 // JWT
 var jwt = builder.Configuration.GetSection("Jwt");

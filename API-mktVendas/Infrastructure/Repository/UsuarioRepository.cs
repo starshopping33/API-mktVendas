@@ -3,7 +3,6 @@ using API_mktVendas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 
-
 using XAct.Users;
 
 namespace tech_store_api.Infrastructure.Repositories
@@ -20,8 +19,16 @@ namespace tech_store_api.Infrastructure.Repositories
             await db.SaveChangesAsync();
         }
 
-        public async Task<Usuario?> GetByIdAsync(int id) =>
-          await db.Usuario.FirstOrDefaultAsync(u => u.Id == id);
+
+        public async Task<List<Usuario>> GetAllUser()
+        {
+            return await db.Usuario.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<Usuario?> GetByIdAsync(int id)
+        {
+            return await db.Usuario.FindAsync(id);
+        }
 
         public async Task UpdateAsync(Usuario usuario)
         {
@@ -32,6 +39,12 @@ namespace tech_store_api.Infrastructure.Repositories
 
         public async Task SaveChangesAsync()
         {
+            await db.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Usuario usuario)
+        {
+            db.Usuario.Remove(usuario);
             await db.SaveChangesAsync();
         }
     }
