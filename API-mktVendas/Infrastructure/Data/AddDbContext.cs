@@ -13,7 +13,7 @@ namespace API_mktVendas.Infrastructure.Data
         public DbSet<Login> Login { get; set; }
 
         public DbSet<Produto> Produto { get; set; }
-
+        public DbSet<HistoricoCompra> HistoricoCompras { get; set; }
         public DbSet<FormaPagamento> FormaPagamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

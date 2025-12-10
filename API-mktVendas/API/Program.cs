@@ -41,6 +41,7 @@ builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<FormaPagamentoService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ProdutoService>();
+builder.Services.AddScoped<HistoricoDeComprasService>();
 
 
 // JWT
