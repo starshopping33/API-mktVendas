@@ -1,10 +1,10 @@
 ﻿using API_mktVendas.API.Controller;
 using API_mktVendas.Application.Dto;
 using API_mktVendas.Application.Service;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Paket;
-
-
+using System.Security.Claims;
 using static API_mktVendas.Application.Dto.AuthDto;
 
 namespace tech_store_api.API.Controllers
@@ -109,5 +109,18 @@ namespace tech_store_api.API.Controllers
                 return StatusCode(500, new { error = "Erro interno no servidor.", details = ex.Message });
             }
         }
+
+
+
+        //[HttpGet("login-google")]
+        //public IActionResult LoginGoogle()
+        //{
+        //    Provider 
+        //}
+
+       
+        
+
+
     }
 }
