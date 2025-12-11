@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using projeto_vwndas.Projeto_Vendas_API.Domain.Entities;
 
+
 namespace projeto_vwndas.Projeto_Vendas_API.Infrastructure.Data.Configuration
 {
     public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>

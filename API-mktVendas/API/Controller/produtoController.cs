@@ -6,59 +6,72 @@ namespace projeto_vwndas.Projeto_Vendas_API.API.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class produto : ControllerBase
+    public class ProdutoController : ControllerBase
     {
         private readonly ProdutoService _service;
-        private readonly object criarprodutoId;
-        private object criarproduto;
 
-        public produto(ProdutoService service)
+        public ProdutoController(ProdutoService service)
         {
             _service = service;
         }
 
+        // GET ALL
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string categoria)
         {
-            var produto = _service.Obterproduto();
+            var produtos = _service.Obterproduto();
+
+            if (!string.IsNullOrEmpty(categoria) && categoria != "")
+                produtos = produtos.Where(p => p.CategoriaId == categoria).ToList();
+
+            return Ok(produtos);
+        }
+
+        
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var produto = _service.ObterPorId(id);
+            if (produto == null)
+                return NotFound();
+
             return Ok(produto);
         }
 
+        
         [HttpPost]
-        public IActionResult CreateCadastro([FromBody] Produto produto)
+        public IActionResult Create([FromBody] Produto produto)
         {
             if (produto == null)
-                return BadRequest("Cadastro inválido.");
+                return BadRequest("Produto inválido.");
 
-            var createdCadastro = _service.Criarproduto(produto);
+            var created = _service.Criarproduto(produto);
 
-            return CreatedAtAction(nameof(Get), new { id = criarproduto },criarproduto);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-
-
-  [HttpPut]
-  public IActionResult AtualizarProduto([FromBody] Produto produto)
-{
-    if (produto == null)
-        return BadRequest();
-
-    var AtualizarProduto = _service.Atualizarproduto(produto);
-
-    return CreatedAtAction(nameof(Get), new {  AtualizarProduto }, AtualizarProduto);
-}
-
-
-        [HttpDelete]
-        public IActionResult DeletarProduto([FromBody] Produto produto)
+        
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] Produto produto)
         {
-            if (produto == null)
-                return BadRequest("item excluido.");
+            if (produto == null || id != produto.Id)
+                return BadRequest("Dados inconsistentes.");
 
-            var DeletarProduto = _service.Deletarproduto(produto);
+            var atualizado = _service.Atualizarproduto(produto);
 
-            return CreatedAtAction(nameof(Get), new { id = DeletarProduto }, DeletarProduto);
+            return Ok(atualizado);
         }
 
+     
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var apagado = _service.Deletarproduto(id);
+
+            if (!apagado)
+                return NotFound();
+
+            return NoContent();
+        }
     }
 }

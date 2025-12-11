@@ -43,5 +43,31 @@ namespace API_mktVendas.Application.Service
             ;
            
         }
+       
+
+        internal void Atualizarproduto(object produto)
+        {
+            return;
+        }
+
+        internal object ObterPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Deletarproduto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object Obterproduto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Deletarproduto()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
